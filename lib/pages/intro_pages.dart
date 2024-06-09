@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/controllers/login_register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/components/my_button.dart';
 
@@ -12,12 +13,14 @@ class IntroPage extends StatefulWidget {
 class _IntroPageState extends State<IntroPage> {
   final _formKey = GlobalKey<FormState>();
 
-  void _login() {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  void _login(context) {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      // Perform login logic here
-      // For simplicity, we navigate directly to the shop page
-      Navigator.pushNamed(context, '/shop_page');
+      loginRegisterController.signInWithEmailAndPassword(
+          context, emailController.text, passwordController.text);
     }
   }
 
@@ -57,6 +60,8 @@ class _IntroPageState extends State<IntroPage> {
                 child: Column(
                   children: [
                     TextFormField(
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelText: 'Email',
                         border: OutlineInputBorder(
@@ -73,6 +78,8 @@ class _IntroPageState extends State<IntroPage> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
+                      controller: passwordController,
+                      keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
                         labelText: 'Password',
                         border: OutlineInputBorder(
@@ -90,7 +97,9 @@ class _IntroPageState extends State<IntroPage> {
                     ),
                     const SizedBox(height: 20),
                     MyButton(
-                      onTap: _login,
+                      onTap: () {
+                        _login(context);
+                      },
                       color: Colors.blue,
                       height: 50,
                       width: 50,

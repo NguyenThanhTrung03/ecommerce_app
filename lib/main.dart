@@ -1,5 +1,6 @@
 import 'package:ecommerce_app/firebase_options.dart';
 import 'package:ecommerce_app/models/shop.dart';
+import 'package:ecommerce_app/pages/auth_page.dart';
 import 'package:ecommerce_app/pages/cart_page.dart';
 import 'package:ecommerce_app/pages/registration_page.dart';
 import 'package:ecommerce_app/pages/shop_page.dart';
@@ -29,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const IntroPage(),
+      home: const AuthPage(),
       theme: lightMode,
       routes: {
         '/intro_page': (context) => const IntroPage(),

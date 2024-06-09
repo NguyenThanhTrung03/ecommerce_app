@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/components/my_button.dart';
 import 'package:ecommerce_app/models/product.dart';
 import 'package:ecommerce_app/models/shop.dart';
+import 'package:ecommerce_app/pages/payment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -40,11 +41,10 @@ class CartPage extends StatelessWidget {
 
   //user pressed pay button
   void payButtonPressed(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => const AlertDialog(
-        content:
-            Text('User wants to pay! Connect this app to your payment backend'),
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => PaymentPage(),
       ),
     );
   }

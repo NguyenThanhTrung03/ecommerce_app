@@ -1,3 +1,4 @@
+import 'package:ecommerce_app/controllers/login_register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/components/my_button.dart';
 
@@ -11,13 +12,15 @@ class RegistrationPage extends StatefulWidget {
 
 class _RegistrationPageState extends State<RegistrationPage> {
   final _formKey = GlobalKey<FormState>();
-
-  void _register() {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  void _register(context) async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       // Perform registration logic here
       // For simplicity, we navigate directly to the login page
-      Navigator.pushNamed(context, '/intro_page');
+      loginRegisterController.register(context, emailController.text,
+          passwordController.text, passwordController.text);
     }
   }
 
@@ -35,6 +38,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
+                controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(
@@ -51,6 +55,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               const SizedBox(height: 20),
               TextFormField(
+                controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(
@@ -68,7 +73,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
               ),
               const SizedBox(height: 20),
               MyButton(
-                onTap: _register,
+                onTap: () {
+                  _register(context);
+                },
                 color: Colors.green,
                 height: 50,
                 width: 50,
